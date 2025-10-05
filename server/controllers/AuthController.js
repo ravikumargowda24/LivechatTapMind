@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../model/UserModel.js";
-import { compare } from "bcrypt";
+import { compare } from "bcryptjs";
 import { renameSync, unlinkSync } from "fs";
 
 const maxAge = 3 * 24 * 60 * 60 * 1000;
@@ -213,10 +213,10 @@ export const getUserStatus = async (req, res, next) => {
     if (!user) {
       return res.status(404).send("User not found");
     }
-    return res.status(200).json({ 
-      status: user.status, 
+    return res.status(200).json({
+      status: user.status,
       lastSeen: user.lastSeen,
-      currentChat: user.currentChat 
+      currentChat: user.currentChat
     });
   } catch (err) {
     console.log(err);
